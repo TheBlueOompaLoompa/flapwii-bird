@@ -1,0 +1,17 @@
+[default]
+name=Default
+runtime=host
+toolchain=default
+config-opts=
+run-opts=
+prefix=/home/ben/.cache/gnome-builder/install/Flapwii/host
+app-id=
+postbuild=
+prebuild=
+default=true
+
+[default.environment]
+DEVKITPRO=/opt/devkitpro
+DEVKITARM=${DEVKITPRO}/devkitARM
+DEVKITPPC=${DEVKITPRO}/devkitPPC
+PATH=${DEVKITPRO}/tools/bin:$PATH
