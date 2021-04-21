@@ -22,6 +22,9 @@
 
 #include <gccore.h>
 #include <wiiuse/wpad.h>
+#include <fat.h>
+
+#include <fstream>
 
 #define WSP_POINTER_CORRECTION_X 200 
 #define WSP_POINTER_CORRECTION_Y 200
@@ -63,6 +66,30 @@ float yPos = -2000;
 
 float velocity = 0;
 
+int getHighscore()
+{
+	fatInitDefault();
+	int tempScore = 0;
+	std::ifstream save;
+	save.open("/apps/flapwii/game.sav", std::ifstream::in );
+
+	if( !save.fail() )
+	{
+	save >> tempScore;
+	}
+	save.close();
+	return tempScore;
+}
+void saveHighscore()
+{
+	std::ofstream save;
+	save.open("/apps/flapwii/game.sav");
+
+	save <<  highscore_num;
+
+	save.close();
+}
+
 int main (void){
 	GRRLIB_Init();
 
@@ -85,8 +112,9 @@ int main (void){
 	auto isMenu = true;
 
 	ir_t ir;
-	
 
+	highscore_num = getHighscore();
+	
 	while(1){
 		GRRLIB_FillScreen(0x0195c3ff); 
 		WPAD_ScanPads();
@@ -199,6 +227,8 @@ int main (void){
 		
 		GRRLIB_Render();
     }
+
+	saveHighscore();
 
 	GRRLIB_FreeTTF(font);
 	GRRLIB_FreeTexture(bird);
