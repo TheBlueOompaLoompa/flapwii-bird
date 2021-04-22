@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Apr 21 08:27:29 2021
+# Make data base, printed on Thu Apr 22 18:01:18 2021
 
 # Variables
 
@@ -25,13 +25,15 @@ AR := powerpc-eabi-gcc-ar
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # makefile (from 'Makefile', line 79)
-OFILES := bird.png.o font.ttf.o pipe.png.o flapwii.o pipe.o   
+OFILES := bird.png.o flappy.ttf.o font.ttf.o lose.ogg.o pipe.png.o flapwii.o pipe.o oggplayer.o  
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fe50da85-e6ad-4953-87c2-b1eefde50998.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5d4ec98b-cd9c-419e-b18c-5a2ce7ced234.sock
 # makefile (from 'Makefile', line 54)
 VPATH := /home/ben/Documents/BuilderProjects/Flapwii/source /home/ben/Documents/BuilderProjects/Flapwii/source/gfx /home/ben/Documents/BuilderProjects/Flapwii/data
 # makefile (from 'Makefile', line 62)
-CFILES := $(subst ,, )
+CFILES := oggplayer.c 
+# environment
+VSCODE_CWD = /home/ben
 # makefile (from 'Makefile', line 37)
 LIBS := -lgrrlib -lfreetype -lbz2 -lpngu -lpng -ljpeg -lz -lfat -lwiiuse -lbte -lasnd -logc -lm -lvorbisidec -logg 
 # makefile (from '/opt/devkitpro/devkitPPC/base_tools', line 48)
@@ -39,7 +41,7 @@ SILENTMSG := @echo
 # default
 MAKE_COMMAND := make
 # makefile (from 'Makefile', line 77)
-OFILES_BIN := bird.png.o font.ttf.o pipe.png.o
+OFILES_BIN := bird.png.o flappy.ttf.o font.ttf.o lose.ogg.o pipe.png.o
 # environment
 GOPATH = /home/ben/go
 # automatic
@@ -117,7 +119,7 @@ LC_COLLATE = C
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 3293
+VSCODE_PID = 1121
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -129,7 +131,7 @@ RANLIB := powerpc-eabi-gcc-ranlib
 # environment
 DEVKITPPC = /opt/devkitpro/devkitPPC
 # makefile (from 'Makefile', line 81)
-HFILES := bird_png.h font_ttf.h pipe_png.h
+HFILES := bird_png.h flappy_ttf.h font_ttf.h lose_ogg.h pipe_png.h
 # makefile (from 'Makefile', line 22)
 INCLUDES := 
 # environment
@@ -157,7 +159,7 @@ SHELL = /bin/sh
 # default
 MAKECMDGOALS := all
 # makefile (from 'Makefile', line 78)
-OFILES_SOURCES := flapwii.o pipe.o   
+OFILES_SOURCES := flapwii.o pipe.o oggplayer.o  
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -165,7 +167,7 @@ SHLVL = 0
 # environment
 NODE_RED_HOME = /home/ben/.vscode-oss/extensions/formulahendry.vscode-node-red-0.0.2/node_modules/node-red
 # makefile (from 'Makefile', line 66)
-BINFILES := bird.png font.ttf pipe.png
+BINFILES := bird.png flappy.ttf font.ttf lose.ogg pipe.png
 # environment
 MAKELEVEL := 0
 # makefile (from 'Makefile', line 94)
@@ -233,9 +235,9 @@ LDFLAGS = -g $(MACHDEP) -Wl,-Map,$(notdir $@).map -Wl,--section-start,.init=0x81
 # makefile (from '/opt/devkitpro/devkitPPC/base_tools', line 35)
 ISVC = $(or $(VCBUILDHELPER_COMMAND),$(MSBUILDEXTENSIONSPATH32),$(MSBUILDEXTENSIONSPATH))
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3280
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1091
 # environment
-VSCODE_NODE_CACHED_DATA_DIR = /home/ben/.config/Code - OSS/CachedData/2b9aebd5354a3629c3aba0a5f5df49f43d6689f8
+VSCODE_NODE_CACHED_DATA_DIR = /home/ben/.config/Code - OSS/CachedData/3c4e3df9e89829dce27b7b5c24508306b151f30d
 # environment
 _ = /usr/bin/make
 # environment
@@ -257,7 +259,7 @@ PORTLIBS := /opt/devkitpro/portlibs/wii /opt/devkitpro/portlibs/ppc
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-9197d56a-1.54.3-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-9197d56a-1.55.2-main.sock
 # makefile (from '/opt/devkitpro/devkitPPC/base_tools', line 32)
 NM := powerpc-eabi-gcc-nm
 # environment
@@ -276,9 +278,9 @@ LD := powerpc-eabi-g++
 VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
+ 
 # makefile (from 'Makefile', line 29)
 CXXFLAGS = $(CFLAGS)
- 
 # environment
 XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/ben
 # makefile (from '/opt/devkitpro/devkitPPC/base_tools', line 31)
@@ -300,7 +302,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome-xorg
 # variable set hash-table stats:
-# Load=143/1024=14%, Rehash=0, Collisions=10/268=4%
+# Load=144/1024=14%, Rehash=0, Collisions=10/269=4%
 
 # Pattern-specific Variable Values
 
@@ -308,15 +310,15 @@ GDMSESSION = gnome-xorg
 
 # Directories
 
-# /home/ben/Documents/BuilderProjects/Flapwii/source (device 2049, inode 28574349): 5 files, no impossibilities.
-# . (device 2049, inode 28574348): 13 files, no impossibilities.
-# source (device 2049, inode 28574349): 5 files, no impossibilities.
-# data (device 2049, inode 29229889): 5 files, no impossibilities.
+# /home/ben/Documents/BuilderProjects/Flapwii/source (device 2049, inode 28574349): 7 files, no impossibilities.
+# . (device 2049, inode 28574348): 15 files, no impossibilities.
+# source (device 2049, inode 28574349): 7 files, no impossibilities.
+# data (device 2049, inode 29229889): 7 files, no impossibilities.
 # /home/ben/Documents/BuilderProjects/Flapwii/source/gfx: could not be stat'd.
-# /home/ben/Documents/BuilderProjects/Flapwii/data (device 2049, inode 29229889): 5 files, no impossibilities.
+# /home/ben/Documents/BuilderProjects/Flapwii/data (device 2049, inode 29229889): 7 files, no impossibilities.
 # source/gfx: could not be stat'd.
 
-# 33 files, no impossibilities in 7 directories.
+# 43 files, no impossibilities in 7 directories.
 
 # Implicit Rules
 
@@ -435,7 +437,6 @@ build:
 
 .PHONY: build clean
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -455,12 +456,12 @@ build:
 # General ('VPATH' variable) search path:
 # /home/ben/Documents/BuilderProjects/Flapwii/source:/home/ben/Documents/BuilderProjects/Flapwii/source/gfx:/home/ben/Documents/BuilderProjects/Flapwii/data
 
-# strcache buffers: 1 (0) / strings = 46 / storage = 560 B / avg = 12 B
-# current buf: size = 8162 B / used = 560 B / count = 46 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 52 / storage = 619 B / avg = 11 B
+# current buf: size = 8162 B / used = 619 B / count = 52 / avg = 11 B
 
-# strcache performance: lookups = 76 / hit rate = 39%
+# strcache performance: lookups = 82 / hit rate = 36%
 # hash-table stats:
-# Load=46/8192=1%, Rehash=0, Collisions=3/76=4%
-# Finished Make data base on Wed Apr 21 08:27:29 2021
+# Load=52/8192=1%, Rehash=0, Collisions=3/82=4%
+# Finished Make data base on Thu Apr 22 18:01:18 2021
 
  

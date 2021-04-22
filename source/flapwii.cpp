@@ -132,6 +132,7 @@ int main (void){
         	int cursorY = (ir.sy-WSP_POINTER_CORRECTION_Y)*sensitivity;
 
 			GRRLIB_PrintfTTF(165, 70, flappy_font, "Flapwii Bird", 96, 0xf6ef29ff);
+			GRRLIB_PrintfTTF(175, 300, flappy_font, "Press A to flap", 72, 0xf6ef29ff);
 			GRRLIB_DrawImg(cursorX, cursorY, bird, 0, 1, 1, GRRLIB_WHITE);
 			if( buttonsDown & WPAD_BUTTON_A )
 			{
@@ -190,6 +191,8 @@ int main (void){
 					yPos > screenHeight || yPos < 0
 				)
 			{
+				// On loose
+
 				first_round = true;
 				pipe_1.reset();
 				pipe_2.reset();
