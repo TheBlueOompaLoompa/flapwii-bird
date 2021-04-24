@@ -34,11 +34,10 @@ const double sensitivity = 0.7;
 const int screenWidth = 640;
 const int screenHeight = 480;
 
-const float gravity = 0.5;
-const float flap_height = -6.5;
 const float bird_x = screenWidth/3;
 
 #include "pipe.hpp"
+#include "physics.hpp"
 
 // GRRLIB
 #include <grrlib.h>
@@ -62,12 +61,7 @@ char highscore[32];
 int score_num = 0;
 int highscore_num = 0;
 
-float yPos = -2000;
-
-float velocity = 0;
-
-int getHighscore()
-{
+int getHighscore(){
 	fatInitDefault();
 	int tempScore = 0;
 	std::ifstream save;
@@ -80,8 +74,7 @@ int getHighscore()
 	save.close();
 	return tempScore;
 }
-void saveHighscore()
-{
+void saveHighscore(){
 	std::ofstream save;
 	save.open("/apps/flapwii/game.sav");
 
@@ -105,9 +98,9 @@ int main (void){
 	auto pipe_1 = Pipe();
 	auto pipe_2 = Pipe();
 
-	auto first_round = true;
+	auto physics = Physics();
 
-	auto pipe_iter = false;
+	auto first_round = true;
 
 	auto isMenu = true;
 
@@ -126,8 +119,7 @@ int main (void){
 		if(buttonsDown & WPAD_BUTTON_HOME)
 			break;
 
-		if(isMenu)
-		{
+		if(isMenu){
 			int cursorX = (ir.sx)*sensitivity;
         	int cursorY = (ir.sy-WSP_POINTER_CORRECTION_Y)*sensitivity;
 
@@ -137,21 +129,12 @@ int main (void){
 			if( buttonsDown & WPAD_BUTTON_A )
 			{
 				isMenu = false;
-				yPos = screenHeight/3;
+				
 			}
 		}
-		else
-		{
-			if( buttonsDown & WPAD_BUTTON_A )
-			{
-				velocity = flap_height;
-			}
-			else 
-			{
-				velocity += gravity;
-			}
-
-			yPos += velocity;
+		else{
+			auto position = physics.update_bird(buttonsDown & WPAD_BUTTON_A, pipe_1, pipe_2);
+			score_num = physics.score;
 
 			// Pipe 1
 			GRRLIB_DrawImg(pipe_1.x, pipe_1.y, pipe, 0, 1, 1, GRRLIB_WHITE);
@@ -178,43 +161,17 @@ int main (void){
 			}
 
 			// Collision Detection
-			if(
-					// Pipe 1
-					(((pipe_1.x - (144/4) <= bird_x || pipe_1.x <= bird_x) && pipe_1.x + 52 >= bird_x) &&
-					(pipe_1.y <= yPos || pipe_1.y - 100 >= yPos )) ||
-
-					// Pipe 2
-					(((pipe_2.x - (144/4) <= bird_x || pipe_2.x <= bird_x) && pipe_2.x + 52 >= bird_x) &&
-					(pipe_2.y <= yPos || pipe_2.y - 100 >= yPos )) ||
-				
-					// Screen top bottom
-					yPos > screenHeight || yPos < 0
-				)
-			{
-				// On loose
-
+			if(physics.dead){
 				first_round = true;
 				pipe_1.reset();
 				pipe_2.reset();
-
-				velocity = 0;
-				yPos = 0;
 				
 				score_num = 0;
-				pipe_iter = false;
 				isMenu = true;
 			}
 
-			// Score detection
-			if((!pipe_iter && pipe_1.x + 52 <= bird_x && pipe_1.x + 52 + 20 >= bird_x) ||
-				(pipe_iter && pipe_2.x + 52 <= bird_x && pipe_2.x + 52 + 20 >= bird_x)
-			) {
-				pipe_iter = !pipe_iter;
-				score_num++;
-			}
-
 			// Show Bird
-			GRRLIB_DrawImg(bird_x, yPos, bird, velocity * 1.3, 0.3, 0.3, GRRLIB_WHITE);
+			GRRLIB_DrawImg(bird_x, position.y, bird, physics.velocity * 1.3, 0.3, 0.3, GRRLIB_WHITE);
 		}
 
 		// Show Score
