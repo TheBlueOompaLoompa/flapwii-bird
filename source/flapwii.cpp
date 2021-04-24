@@ -38,6 +38,7 @@ const float bird_x = screenWidth/3;
 
 #include "pipe.hpp"
 #include "physics.hpp"
+#include "vec2.hpp"
 
 // GRRLIB
 #include <grrlib.h>
@@ -104,6 +105,8 @@ int main (void){
 
 	auto isMenu = true;
 
+	Vec2 position;
+
 	ir_t ir;
 
 	highscore_num = getHighscore();
@@ -133,7 +136,7 @@ int main (void){
 			}
 		}
 		else{
-			auto position = physics.update_bird(buttonsDown & WPAD_BUTTON_A, pipe_1, pipe_2);
+			position = physics.update_bird(buttonsDown & WPAD_BUTTON_A, pipe_1, pipe_2);
 			score_num = physics.score;
 
 			// Pipe 1

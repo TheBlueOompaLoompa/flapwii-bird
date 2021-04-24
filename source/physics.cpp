@@ -32,13 +32,14 @@ void Physics::reset(){
 }
 
 bool Physics::is_colliding(Pipe pipe_1, Pipe pipe_2){
-	// Pipe 1
-	return (((pipe_1.x - (144/4) <= Physics::position.x || pipe_1.x <= Physics::position.x) && pipe_1.x + 52 >= Physics::position.x) &&
-	(pipe_1.y <= Physics::position.y || pipe_1.y - 100 >= Physics::position.y )) ||
+	return
+	// Pipe 1 
+	((pipe_1.x - 52 <= Physics::position.x + (144*.3) && pipe_1.x >= Physics::position.x) &&
+	(pipe_1.y <= Physics::position.y + (100*.3) || pipe_1.y - 100 >= Physics::position.y )) ||
 
 	// Pipe 2
-	(((pipe_2.x - (144/4) <= Physics::position.x || pipe_2.x <= Physics::position.x) && pipe_2.x + 52 >= Physics::position.x) &&
-	(pipe_2.y <= Physics::position.y || pipe_2.y - 100 >= Physics::position.y )) ||
+	((pipe_2.x - 52 <= Physics::position.x + (144*.3) && pipe_2.x >= Physics::position.x) &&
+	(pipe_2.y <= Physics::position.y + (100*.3) || pipe_2.y - 100 >= Physics::position.y )) ||
 
 	// Screen top bottom
 	Physics::position.y > 480 || Physics::position.y < 0;
